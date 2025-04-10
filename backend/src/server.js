@@ -3,8 +3,8 @@ import dontenv from 'dotenv'
 import mongoose from 'mongoose';
 
 dontenv.config();
-import applianceRoutes from './controllers/applianceRoutes.js'
-import readingRoutes from './controllers/readingRoutes.js'
+import applianceRoutes from './routes/applianceRoutes.js'
+import readingRoutes from './routes/readingRoutes.js'
 
 mongoose.connect(process.env.MONGO_URI)
         .then(()=>console.log('Connected to the database successfully'))
@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 const app = express();
 app.use(express.json());
-const PORT = 4000;
+const PORT =  process.env.PORT||4000;
 
 app.get('/',(req,res)=>{
     res.status(200).json({
@@ -22,5 +22,5 @@ app.get('/',(req,res)=>{
 app.use('/api/appliances',applianceRoutes);
 app.get('/api/readings',readingRoutes);
 app.listen(PORT,()=>{
-    console.log('server is running');
+    console.log(`server is running at ${PORT}`);
 })
