@@ -1,12 +1,16 @@
-import express from 'express'
+import express from 'express';
+import { 
+    addReading, 
+    getAllReadings, 
+    getReadingsByAppliance,
+    getReadingsByDateRange 
+} from '../controllers/reading.controller.js';
+
 const router = express.Router();
 
-router.get('/:id',(req,res)=>{
-    
-})
-router.get('/generate',(req,res)=>{
-    
-})
-
+router.post('/add', addReading);
+router.get('/', getAllReadings);
+router.get('/appliance/:id', getReadingsByAppliance);
+router.get('/range', getReadingsByDateRange);
 
 export default router;
